@@ -44,7 +44,8 @@ class TodoCubit extends Cubit<TodoState> {
     getTodos();
   }
 
-  void updateTodoIsComplete(Todo todo, bool isComplete) {
-    
+  void updateTodoIsComplete(Todo todo, bool isComplete) async {
+    await _todoRepo.updateTodoIsComplete(todo, isComplete);
+    getTodos();
   }
 }

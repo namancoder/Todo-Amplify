@@ -26,7 +26,7 @@ class TodoRepository {
     }
   }
 
-  void updateTodoIsComplete(Todo todo, bool isComplete) async {
+  Future <void> updateTodoIsComplete(Todo todo, bool isComplete) async {
     {
       final updatedTodo = todo.copyWith(isDone: isComplete);
       try {
