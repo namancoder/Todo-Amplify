@@ -19,13 +19,15 @@ import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_inte
 import 'package:flutter/foundation.dart';
 
 /** This is an auto generated class representing the Todo type in your schema. */
+
+
 @immutable
 class Todo extends Model {
   static const classType = const _TodoModelType();
   final String id;
   final String title;
   final bool isDone;
-  final TemporalDateTime timeAdded;
+  final String timeAdded;
 
   @override
   getInstanceType() => classType;
@@ -40,16 +42,16 @@ class Todo extends Model {
       required this.id,
       required this.title,
       required this.isDone,
-      required this.timeAdded });
+      this.timeAdded =" "});
 
   factory Todo(
       {
-        required String id,
+      required String id,
       required String title,
       required bool isDone,
-      required TemporalDateTime timeAdded}) {
+      String timeAdded = ""}) {
     return Todo._internal(
-        id: id == null ? UUID.getUUID() : id,
+        id: id == "" ? UUID.getUUID() : id,
         title: title,
         isDone: isDone,
         timeAdded: timeAdded);
@@ -81,15 +83,13 @@ class Todo extends Model {
     buffer.write("title=" + "$title" + ", ");
     buffer.write(
         "isDone=" + (isDone != null ? isDone.toString() : "null") + ", ");
-    buffer.write(
-        "timeAdded=" + (timeAdded != null ? timeAdded.format() : "null"));
+    buffer.write("timeAdded=" + "$timeAdded");
     buffer.write("}");
 
     return buffer.toString();
   }
 
-  Todo copyWith(
-      {String ?id, String ?title, bool ?isDone, TemporalDateTime ?timeAdded}) {
+  Todo copyWith({String ?id, String ?title , bool ?isDone, String ?timeAdded }) {
     return Todo(
         id: id ?? this.id,
         title: title ?? this.title,
@@ -101,16 +101,10 @@ class Todo extends Model {
       : id = json['id'],
         title = json['title'],
         isDone = json['isDone'],
-        timeAdded =  json['timeAdded'] != null
-            ? TemporalDateTime.fromString(json['timeAdded'])
-            : null! ;
+        timeAdded = json['timeAdded'];
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'isDone': isDone,
-        'timeAdded': timeAdded?.format()
-      };
+  Map<String, dynamic> toJson() =>
+      {'id': id, 'title': title, 'isDone': isDone, 'timeAdded': timeAdded};
 
   static final QueryField ID = QueryField(fieldName: "todo.id");
   static final QueryField TITLE = QueryField(fieldName: "title");
@@ -145,7 +139,7 @@ class Todo extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: Todo.TIMEADDED,
         isRequired: false,
-        ofType: ModelFieldType(ModelFieldTypeEnum.dateTime)));
+        ofType: ModelFieldType(ModelFieldTypeEnum.string)));
   });
 }
 

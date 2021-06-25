@@ -32,6 +32,7 @@ dependencies:
   amplify_flutter: "<1.0.0"
   # amplify_api: "<1.0.0" // UNCOMMENT this line once backend is deployed
   amplify_datastore: "<1.0.0"
+  flutter_bloc: ^7.0.1
 
 dev_dependencies:
   flutter_test:
